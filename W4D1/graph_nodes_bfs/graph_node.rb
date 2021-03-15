@@ -12,8 +12,24 @@ class GraphNode
         @neighbors += arr 
     end
 
+    def inspect
+    end
+
     def bfs(starting_node, target_value)
-        
+        starting_node.neighbors.each do |neighbor|
+            if !neighbor.neighbors.empty?
+                if neighbor.value == target_value
+                    return neighbor.value 
+                else 
+                    neighbor.neighbors.each do |child|
+                        if child.value == target 
+                            return child.value 
+                        end
+                    end
+                end
+            end
+        end
+
     end
 
 end
@@ -28,4 +44,4 @@ a.neighbors = [b, c, e]
 c.neighbors = [b, d]
 e.neighbors = [a]
 f.neighbors = [e]
-p a 
+p bfs(a, "b") 
